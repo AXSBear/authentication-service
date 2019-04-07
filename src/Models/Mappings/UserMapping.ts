@@ -25,11 +25,12 @@ export const UserMapping = new EntitySchema<User>({
     email: {
       name: 'email',
       type: 'varchar',
-      nullable: false,
+      nullable: true,
     },
     lastLogin: {
       name: 'last_login',
       type: 'timestamp with time zone',
+      nullable: true,
     },
   },
   relations: {

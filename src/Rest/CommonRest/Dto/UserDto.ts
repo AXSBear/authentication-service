@@ -1,34 +1,38 @@
-import { User } from '../../../Models/Entities/User';
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsDate, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsDate, IsEmail, IsInt, IsNotEmpty, IsPositive, IsString } from 'class-validator';
+import { User } from '../../../Models/Entities/User';
 
 export class UserDto {
 
-  public id: number;
-
-  @ApiModelProperty({ description: 'Электронная почта пользователя', required: true, type: String, example: 'admin' })
-  @IsNotEmpty({ message: 'Электронная почта обязательный параметр' })
-  @IsEmail()
-  public email: string;
+  @ApiModelProperty({ description: 'Уникальный идентификатор заявки', required: true, type: 'int', example: 42 })
+  @IsNotEmpty()
+  @IsInt()
+  @IsPositive()
+  public readonly id: number;
 
   @ApiModelProperty({ description: 'Логин', required: true, type: String, example: 'admin' })
   @IsNotEmpty({ message: 'Логин обязательный параметр' })
   @IsString()
-  public login: string;
+  public readonly login: string;
+
+  @ApiModelProperty({ description: 'Электронная почта пользователя', required: true, type: String, example: 'admin' })
+  @IsNotEmpty({ message: 'Электронная почта обязательный параметр' })
+  @IsEmail()
+  public readonly email: string;
 
   @ApiModelProperty({ description: 'Дата рождения', type: Date, example: '12.12.1994' })
   @IsDate()
-  public birthDate: Date;
+  public readonly birthDate: Date;
 
   @ApiModelProperty({ description: 'Дата последнего входа', required: true, type: Date, example: '12.12.1994' })
   @IsNotEmpty({ message: 'Дата последнего входа обязательный параметр' })
   @IsDate()
-  public lastLogin: Date;
+  public readonly lastLogin: Date;
 
   @ApiModelProperty({ description: 'Дата регистрации', required: true, type: Date, example: '12.12.1994' })
   @IsNotEmpty({ message: 'Дата регистрации обязательный параметр' })
   @IsDate()
-  public createdAt: Date;
+  public readonly createdAt: Date;
 
   public constructor(userEntity: User) {
     this.id = userEntity.id;

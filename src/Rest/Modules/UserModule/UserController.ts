@@ -2,43 +2,38 @@ import {
   BadRequestException,
   Body,
   Controller,
-  Delete,
   Get, InternalServerErrorException,
   NotFoundException, NotImplementedException,
   Param,
-  Post,
-  Put,
-  Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { IBaseCrudService } from 'src/Services/Services.Face/IBaseCrudService';
 import { AddUserModel } from '../../../Common/Models/AddUserModel';
-import { GetParamsModel } from '../../../Common/Models/GetParamsModel';
 import { dependencyResolver } from '../../../inversify.config';
 import { User } from '../../../Models/Entities/User';
 import { TYPES } from '../../../types';
 import { UserDto } from '../../CommonRest/Dto/UserDto';
 import { IBaseController } from '../../CommonRest/IBaseController';
 
-@ApiUseTags('User')
-@Controller('User')
+@ApiUseTags('Пользователи')
+@Controller('user')
 export class UserController implements IBaseController {
 
-  @Post()
+  /*@Post()
   @ApiOperation({
     title: 'Создать',
     description: 'Создает сущность с указанными параметрами',
   })
-  @ApiOkResponse({ description: 'Созданная сущность', type: UserDto })
+  @ApiOkResponse({ description: 'Созданная сущность', type: UserDto })*/
   public async create(@Body() model: AddUserModel): Promise<UserDto> {
     throw new NotImplementedException();
   }
 
-  @Delete(':id')
+  /*@Delete(':id')
   @ApiOperation({
     title: 'Удалить',
     description: 'Дает возможнось удалить сущность по указанному иденификатору сущости',
-  })
+  })*/
   public async delete(@Param('id') id: number): Promise<any> {
     throw new NotImplementedException();
   }
@@ -70,7 +65,7 @@ export class UserController implements IBaseController {
     description: 'Дает возможнось получить список отсортированный и отфильтрованный по указанным в запросе параметрам',
   })
   @ApiOkResponse({ description: 'Отфильтрованный и отсортированный список', type: UserDto, isArray: true })
-  public async getList(@Query() params?: GetParamsModel): Promise<UserDto[]> {
+  public async getList(): Promise<UserDto[]> {
     const service = dependencyResolver.get<IBaseCrudService<User>>(TYPES.IService);
     const models: User[] = await service.getList(User);
     if (models == null || models === undefined) {
@@ -79,12 +74,12 @@ export class UserController implements IBaseController {
     return models.map((item: User) => new UserDto(item));
   }
 
-  @Put()
+  /*@Put()
   @ApiOperation({
     title: 'Изменить',
     description: 'Дает возможнось изменить экземпляр сущности',
   })
-  @ApiOkResponse({ description: 'Обновленный', type: UserDto })
+  @ApiOkResponse({ description: 'Обновленный', type: UserDto })*/
   public async update(@Param('id') id: number, @Body() model: any): Promise<UserDto> {
     throw new NotImplementedException();
   }
