@@ -1,5 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsIP, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { Session } from '../../../Models/Entities/Session';
 
 export class SessionDto {
 
@@ -22,4 +23,11 @@ export class SessionDto {
   @IsNotEmpty({ message: 'Идентификатор приложения обязательный параметр' })
   @IsString()
   public readonly application: string;
+
+  public constructor(session: Session) {
+    this.uuid = session.id;
+    this.type = 'TEST';
+    this.application = 'TEST';
+    this.ipAddress = ':0';
+  }
 }

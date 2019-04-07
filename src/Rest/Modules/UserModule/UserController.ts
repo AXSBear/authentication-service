@@ -53,7 +53,7 @@ export class UserController implements IBaseController {
 
     const model: User = await service.getOne(User, id);
     if (model === null || model === undefined) {
-      throw new NotFoundException('Entity not found');
+      throw new NotFoundException('user not found');
     }
 
     return new UserDto(model);
