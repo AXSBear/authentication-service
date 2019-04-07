@@ -1,0 +1,18 @@
+{
+  "type": "postgres",
+  "host": "10.0.5.231",
+  "port": 32771,
+  "username": "postgres",
+  "password": "postgres",
+  "database": "authentication-service",
+  "synchronize": false,
+  "logging": true,
+  "entities": [
+    "src/Models/Mappings/*.ts"
+  ],
+  "migrationsTableName": "changelog",
+  "migrations": ["migration/*.ts"],
+  "cli": {
+    "migrationsDir": "migration"
+  }
+}
